@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomManagementAPI", "RoomManagementAPI\RoomManagementAPI.csproj", "{79A80C0F-98EC-466A-A639-2AF205A77937}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomManagementModels", "RoomManagementModels\RoomManagementModels.csproj", "{48ED8748-33E4-4273-8CD8-74B42A988658}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomManagementDataAccess", "RoomManagementDataAccess\RoomManagementDataAccess.csproj", "{1B58E3B8-21D6-48F9-A9F4-62FA5AF69237}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomManagementUI", "RoomManagementUI\RoomManagementUI.csproj", "{55FE797A-2C56-4760-B657-DD501716A6D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomManagement.BusinessLayer", "RoomManagement.BusinessLayer\RoomManagement.BusinessLayer.csproj", "{37F7A69F-E0DB-458E-BD86-47959CB1A3A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomManagement.BusinessLayerTests", "RoomManagement.BusinessLayerTests\RoomManagement.BusinessLayerTests.csproj", "{9E5C9A20-B504-4446-A7B2-8E166C25E1EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79A80C0F-98EC-466A-A639-2AF205A77937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79A80C0F-98EC-466A-A639-2AF205A77937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79A80C0F-98EC-466A-A639-2AF205A77937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79A80C0F-98EC-466A-A639-2AF205A77937}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48ED8748-33E4-4273-8CD8-74B42A988658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48ED8748-33E4-4273-8CD8-74B42A988658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48ED8748-33E4-4273-8CD8-74B42A988658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48ED8748-33E4-4273-8CD8-74B42A988658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B58E3B8-21D6-48F9-A9F4-62FA5AF69237}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B58E3B8-21D6-48F9-A9F4-62FA5AF69237}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B58E3B8-21D6-48F9-A9F4-62FA5AF69237}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B58E3B8-21D6-48F9-A9F4-62FA5AF69237}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55FE797A-2C56-4760-B657-DD501716A6D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55FE797A-2C56-4760-B657-DD501716A6D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55FE797A-2C56-4760-B657-DD501716A6D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55FE797A-2C56-4760-B657-DD501716A6D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37F7A69F-E0DB-458E-BD86-47959CB1A3A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37F7A69F-E0DB-458E-BD86-47959CB1A3A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37F7A69F-E0DB-458E-BD86-47959CB1A3A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37F7A69F-E0DB-458E-BD86-47959CB1A3A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E5C9A20-B504-4446-A7B2-8E166C25E1EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E5C9A20-B504-4446-A7B2-8E166C25E1EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E5C9A20-B504-4446-A7B2-8E166C25E1EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E5C9A20-B504-4446-A7B2-8E166C25E1EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BAB93715-9E9B-498D-9969-E8B353A3EF7F}
+	EndGlobalSection
+EndGlobal
