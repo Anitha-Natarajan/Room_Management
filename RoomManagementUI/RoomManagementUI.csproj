@@ -67,6 +67,7 @@
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\DataGridHelper.cs" />
+    <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\RestAPICall.cs" />
     <Compile Include="LogIn.cs">
       <SubType>Form</SubType>

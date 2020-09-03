@@ -14,6 +14,10 @@ namespace RoomManagementUI.Helper
 {
     public static class RestAPICall
     {
+        /// <summary>
+        /// Get Location from Database
+        /// </summary>
+        /// <returns></returns>
         public static List<LocationModel> BindLocation()
         {
             List<LocationModel> locations = null;
@@ -43,22 +47,42 @@ namespace RoomManagementUI.Helper
             return roomModels;
         }
 
-        public static dynamic GetDashboardData()
-        {            
-            dynamic data = GetInfromationFromAPI("GetDashboard");
-            //using (var client = new HttpClient())
-            //{
-            //    client.BaseAddress = new Uri("http://localhost:51318/api/");
-            //    var responseTask = client.GetAsync("GetDashboard");
-            //    responseTask.Wait();
+        /// <summary>
+        /// Get Dashboard data based on the booking Date and Time Filer
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public static dynamic GetDashboardData(DateTime startDate, DateTime endDate)
+        {
+            dynamic response = null;
+            try
+            {
+                string apiName = String.Format("GetDashboard?startDate=" + startDate + "&endDate=" + endDate); ;
 
-            //    var result = responseTask.Result;
-            //    if (result.IsSuccessStatusCode)
-            //    {
-            //        data = result.Content.ReadAsStringAsync().Result;
-            //    }
-            //}
-            return data;
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Constants.BaseAddress);
+                    var responseTask = client.GetAsync(apiName);
+                    responseTask.Wait();
+
+                    var result = responseTask.Result;
+
+                    if (result.StatusCode != HttpStatusCode.OK)
+                    {
+                        throw new Exception(string.Format("Unable to Process this request. Please check your data and try again. Status Code: {0}", result.StatusCode));
+                    }
+                    else if (result.IsSuccessStatusCode)
+                    {
+                        response = result.Content.ReadAsStringAsync().Result;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return response;
         }
 
         private static dynamic GetInfromationFromAPI(string apiName)
@@ -144,32 +168,12 @@ namespace RoomManagementUI.Helper
 
         public static string AddLocation(string LocationName, string User)
         {
-            string result = null;
-            //string url = "http://localhost:51318/api/AddLocation";
+            string result = null;           
             var request = new
             {
                 locationName = LocationName,
                 userId = User
-            };
-
-            result = SetInfromationFromToAPI("AddLocation", request);
-            //string contentType = "application/json";
-            //var Request = JsonConvert.SerializeObject(request);
-
-            //using (var Client = new HttpClient())
-            //{
-            //    //Client.DefaultRequestHeaders.Add("locationName", txtLocationName.Text);
-            //    //Client.DefaultRequestHeaders.Add("userId", "Test App Id");
-            //    Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
-            //    HttpContent httpContent = new StringContent(Request, Encoding.UTF8, "application/json");
-            //    HttpResponseMessage httpResponse = Client.PostAsync(url, httpContent).Result;
-            //    var tokenResult = httpResponse.Content.ReadAsStringAsync().Result;
-            //    var statuscode = httpResponse.StatusCode;
-            //    if (httpResponse.IsSuccessStatusCode)
-            //    {
-            //        result= tokenResult.ToString();                    
-            //    }                
-            //}
+            };           
             return result;
         }
 
@@ -189,30 +193,13 @@ namespace RoomManagementUI.Helper
             };
 
             result = SetInfromationFromToAPI("AddRoom", request);
-
-            //string contentType = "application/json";
-            //var Request = JsonConvert.SerializeObject(request);
-
-            //using (var Client = new HttpClient())
-            //{
-            //    Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
-            //    HttpContent httpContent = new StringContent(Request, Encoding.UTF8, "application/json");
-            //    HttpResponseMessage httpResponse = Client.PostAsync(url, httpContent).Result;
-            //    var tokenResult = httpResponse.Content.ReadAsStringAsync().Result;
-            //    var statuscode = httpResponse.StatusCode;
-            //    if (httpResponse.IsSuccessStatusCode)
-            //    {
-            //        result = tokenResult.ToString();
-            //    }
-
-            //}
+            
             return result;
         }
 
 
         public static string AddRoomBooking(string roomID, string guestName, string age, string sex, DateTime bookStartDate, DateTime bookEndDate, string user)
-        {
-            //string url = "http://localhost:51318/api/AddRoomBooking";
+        {   
             string result = null;
 
             var request = new
@@ -228,22 +215,6 @@ namespace RoomManagementUI.Helper
 
             result = SetInfromationFromToAPI("AddRoomBooking", request);
 
-            //string contentType = "application/json";
-            //var Request = JsonConvert.SerializeObject(request);
-
-            //using (var Client = new HttpClient())
-            //{
-            //    Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
-            //    HttpContent httpContent = new StringContent(Request, Encoding.UTF8, "application/json");
-            //    HttpResponseMessage httpResponse = Client.PostAsync(url, httpContent).Result;
-            //    var tokenResult = httpResponse.Content.ReadAsStringAsync().Result;
-            //    var statuscode = httpResponse.StatusCode;
-            //    if (httpResponse.IsSuccessStatusCode)
-            //    {
-            //        result = tokenResult.ToString();
-            //    }
-
-            //}
             return result;
         }
        

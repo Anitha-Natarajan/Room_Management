@@ -1,16 +1,15 @@
 ﻿using RoomManagementModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RoomManagementUI
 {
+    /// <summary>
+    /// Room Booknig class
+    /// </summary>
     public partial class RoomBookingForm : Form
     {
         #region Variable
@@ -33,6 +32,11 @@ namespace RoomManagementUI
         #endregion
 
         #region Events
+        /// <summary>
+        /// Add Room button click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddRoom_Click(object sender, EventArgs e)
         {
             //Validate form controls
@@ -43,11 +47,13 @@ namespace RoomManagementUI
                 RoomModel roomModel = room[0];
                 //Validate Gender specific Room.
                 if (roomModel.IsGenderSpecific == "B" || roomModel.IsGenderSpecific == cmbGender.SelectedItem.ToString().Substring(0,1))
-                {
+                {                   
+                    DateTime bookingStartDate = Helper.DateTimeHelper.GetDateTimeValue(dtpStartDate, dtpStartTime);
+                    DateTime bookingEndDate = Helper.DateTimeHelper.GetDateTimeValue(dtpEndDate, dtpEndTime);
 
                     string message = Helper.RestAPICall.AddRoomBooking(cmbRoom.SelectedValue.ToString(), 
                                         txtName.Text, ntxtAge.Value.ToString(), cmbGender.SelectedItem.ToString(),
-                                        dtpStartDate.Value, dtpEndDate.Value, Constants.UserName); //API call to Save Booking details in DB
+                                        bookingStartDate, bookingEndDate, Constants.UserName); //API call to Save Booking details in DB
                     MessageBox.Show(message, Constants.ApplicationName);
                     this.Close();
                 }
@@ -87,6 +93,8 @@ namespace RoomManagementUI
             cmbRoom.DataSource = roomModels; 
             cmbRoom.Enabled = false; //Fix the Room value
         }
+
+        
 
         /// <summary>
         /// Assign format value to Date and Time Control

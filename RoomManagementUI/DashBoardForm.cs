@@ -49,6 +49,7 @@ namespace RoomManagementUI
             BindForm();
             LocationGrid_Initialize(Helper.DataGridHelper.objRoomList);
             RoomGrid_Initialize();
+            BindDateControls();
         }
 
         /// <summary>
@@ -58,6 +59,9 @@ namespace RoomManagementUI
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            DateTime startDate = Helper.DateTimeHelper.GetDateTimeValue(dtpStartDate, dtpStartTime);
+            DateTime endDate = Helper.DateTimeHelper.GetDateTimeValue(dtpEndDate, dtpEndTime);
+            dataGridHelper.BindDashBoardData(startDate, endDate);
             int locationId = int.Parse(cmbLocation.SelectedValue.ToString());
             //Room model is matched with location id
             List<RoomModel> roomModels = Helper.DataGridHelper.objRoomList.Where(l => l.LocationID == locationId).ToList();
@@ -83,7 +87,9 @@ namespace RoomManagementUI
         /// <param name="e"></param>
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            dataGridHelper.BindDashBoardData();
+            DateTime startDate = Helper.DateTimeHelper.GetDateTimeValue(dtpStartDate, dtpStartTime);
+            DateTime endDate = Helper.DateTimeHelper.GetDateTimeValue(dtpEndDate, dtpEndTime);
+            dataGridHelper.BindDashBoardData(startDate, endDate);
             BindLocation();
             LocationDataView.DataSource = Helper.DataGridHelper.objRoomList;
         }
@@ -100,13 +106,33 @@ namespace RoomManagementUI
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Assign format value to Date and Time Control
+        /// </summary>
+        private void BindDateControls()
+        {
+            dtpStartDate.Format = DateTimePickerFormat.Custom;
+            dtpStartDate.CustomFormat = "dd MMM yyyy"; //Date format
+
+            dtpEndDate.Format = DateTimePickerFormat.Custom;
+            dtpEndDate.CustomFormat = "dd MMM yyyy"; //Date format
+
+            dtpStartTime.Format = DateTimePickerFormat.Custom;
+            dtpStartTime.CustomFormat = "HH:mm:ss tt"; //Time format
+
+            dtpEndTime.Format = DateTimePickerFormat.Custom;
+            dtpEndTime.CustomFormat = "HH:mm:ss tt"; //Time format
+        }
         /// <summary>
         /// Bind the controls
         /// /// </summary>
         private void BindForm()
         {
             dataGridHelper.BindImage();
-            dataGridHelper.BindDashBoardData();
+            DateTime startDate = Helper.DateTimeHelper.GetDateTimeValue(dtpStartDate, dtpStartTime);
+            DateTime endDate = Helper.DateTimeHelper.GetDateTimeValue(dtpEndDate, dtpEndTime);
+            dataGridHelper.BindDashBoardData(startDate, endDate);
             BindLocation();
             LocationDataView.DataSource = Helper.DataGridHelper.objRoomList;            
         }
@@ -211,13 +237,13 @@ namespace RoomManagementUI
             Helper.DataGridHelper.Templatecolumn(RoomDataView, Helper.DataGridHelper.FormControls.BoundColumn, "GuestName", "GuestName", "GuestName", true, 90, DataGridViewTriState.True, DataGridViewContentAlignment.MiddleCenter, DataGridViewContentAlignment.MiddleRight, Color.Transparent, null, "", "", Color.Black);
 
             // BoundColumn creation
-            Helper.DataGridHelper.Templatecolumn(RoomDataView, Helper.DataGridHelper.FormControls.BoundColumn, "Ages", "Age", "Age", true, 90, DataGridViewTriState.True, DataGridViewContentAlignment.MiddleCenter, DataGridViewContentAlignment.MiddleRight, Color.Transparent, null, "", "", Color.Black);
+            Helper.DataGridHelper.Templatecolumn(RoomDataView, Helper.DataGridHelper.FormControls.BoundColumn, "Age", "Age", "Age", true, 90, DataGridViewTriState.True, DataGridViewContentAlignment.MiddleCenter, DataGridViewContentAlignment.MiddleRight, Color.Transparent, null, "", "", Color.Black);
             // BoundColumn creation
-            Helper.DataGridHelper.Templatecolumn(RoomDataView, Helper.DataGridHelper.FormControls.BoundColumn, "Sex", "Sex", "Order Detail No", true, 90, DataGridViewTriState.True, DataGridViewContentAlignment.MiddleCenter, DataGridViewContentAlignment.MiddleRight, Color.Transparent, null, "", "", Color.Black);
+            Helper.DataGridHelper.Templatecolumn(RoomDataView, Helper.DataGridHelper.FormControls.BoundColumn, "Sex", "Sex", "Sex", true, 90, DataGridViewTriState.True, DataGridViewContentAlignment.MiddleCenter, DataGridViewContentAlignment.MiddleRight, Color.Transparent, null, "", "", Color.Black);
             // BoundColumn creation
             Helper.DataGridHelper.Templatecolumn(RoomDataView, Helper.DataGridHelper.FormControls.BoundColumn, "BookingStartDate", "BookingStartDate", "BookingStartDate", true, 90, DataGridViewTriState.True, DataGridViewContentAlignment.MiddleCenter, DataGridViewContentAlignment.MiddleRight, Color.Transparent, null, "", "", Color.Black);
             // BoundColumn creation
-            Helper.DataGridHelper.Templatecolumn(RoomDataView, Helper.DataGridHelper.FormControls.BoundColumn, "BookingStartDate", "BookingEndDate", "BookingEndDate", true, 90, DataGridViewTriState.True, DataGridViewContentAlignment.MiddleCenter, DataGridViewContentAlignment.MiddleRight, Color.Transparent, null, "", "", Color.Black);
+            Helper.DataGridHelper.Templatecolumn(RoomDataView, Helper.DataGridHelper.FormControls.BoundColumn, "BookingEndDate", "BookingEndDate", "BookingEndDate", true, 90, DataGridViewTriState.True, DataGridViewContentAlignment.MiddleCenter, DataGridViewContentAlignment.MiddleRight, Color.Transparent, null, "", "", Color.Black);
 
             Helper.DataGridHelper helper = new Helper.DataGridHelper();
             helper.DGVDetailGridClickEvents(RoomDataView);

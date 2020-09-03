@@ -56,7 +56,7 @@ namespace RoomManagementUI.Helper
         #endregion
 
         /// <summary>
-        /// 
+        /// Bind images to display in Grid
         /// </summary>
         public void BindImage()
         {
@@ -71,9 +71,14 @@ namespace RoomManagementUI.Helper
             statusList.Images.Add(detailImage);
         }
 
-        public void BindDashBoardData()
+        /// <summary>
+        /// Call REST API and get hte Room and Booking details
+        /// </summary>
+        public void BindDashBoardData(DateTime startDate, DateTime endDate)
         {
-            var data = Helper.RestAPICall.GetDashboardData();
+            
+            var data = Helper.RestAPICall.GetDashboardData(startDate, endDate);
+            //Handle null values for Json conversion
             var settings = new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore,
@@ -91,7 +96,18 @@ namespace RoomManagementUI.Helper
 
         }
         #region Layout
-
+        /// <summary>
+        /// Data grid design layout
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        /// <param name="BackgroundColor"></param>
+        /// <param name="RowsBackColor"></param>
+        /// <param name="AlternatebackColor"></param>
+        /// <param name="AutoGenerateColumns"></param>
+        /// <param name="HeaderColor"></param>
+        /// <param name="HeaderVisual"></param>
+        /// <param name="RowHeadersVisible"></param>
+        /// <param name="AllowUserToAddRows"></param>
         public static void Layouts(DataGridView dataGridView, Color BackgroundColor, Color RowsBackColor, Color AlternatebackColor,
                                     Boolean AutoGenerateColumns, Color HeaderColor, Boolean HeaderVisual, 
                                     Boolean RowHeadersVisible, Boolean AllowUserToAddRows)
@@ -124,6 +140,15 @@ namespace RoomManagementUI.Helper
         }
         #endregion
 
+        /// <summary>
+        /// Add grid view control
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        /// <param name="cntrlName"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="xval"></param>
+        /// <param name="yval"></param>
         public static void GenerateDataGrid(DataGridView dataGridView, Control cntrlName, int width, int height, int xval, int yval)
         {   
             dataGridView.Location = new Point(xval, yval);
@@ -134,6 +159,24 @@ namespace RoomManagementUI.Helper
         }
 
         #region Templatecolumn
+        /// <summary>
+        /// Bind the different column details in Data grid
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        /// <param name="controlTypes"></param>
+        /// <param name="cntrlnames"></param>
+        /// <param name="Headertext"></param>
+        /// <param name="ToolTipText"></param>
+        /// <param name="Visible"></param>
+        /// <param name="width"></param>
+        /// <param name="Resizable"></param>
+        /// <param name="cellAlignment"></param>
+        /// <param name="headerAlignment"></param>
+        /// <param name="CellTemplateBackColor"></param>
+        /// <param name="dtsource"></param>
+        /// <param name="DisplayMember"></param>
+        /// <param name="ValueMember"></param>
+        /// <param name="CellTemplateforeColor"></param>
         public static void Templatecolumn(DataGridView dataGridView, FormControls controlTypes, String cntrlnames, String Headertext, String ToolTipText, Boolean Visible, int width, DataGridViewTriState Resizable, DataGridViewContentAlignment cellAlignment, DataGridViewContentAlignment headerAlignment, Color CellTemplateBackColor, DataTable dtsource, String DisplayMember, String ValueMember, Color CellTemplateforeColor)
         {
             switch (controlTypes)
@@ -276,7 +319,17 @@ namespace RoomManagementUI.Helper
 
         #endregion
 
-        #region Image Colukmn Click Event
+        #region grid Click Event
+        /// <summary>
+        /// Assign the Main and Detail grid valules and create cell click events
+        /// </summary>
+        /// <param name="masterDataGrid"></param>
+        /// <param name="detailDataGrid"></param>
+        /// <param name="columnIndexs"></param>
+        /// <param name="eventtype"></param>
+        /// <param name="types"></param>
+        /// <param name="DetailTable"></param>
+        /// <param name="FilterColumn"></param>
         public void DGVMasterGridClickEvents(DataGridView masterDataGrid, DataGridView detailDataGrid,int columnIndexs, 
                                             EventTypes eventtype, FormControls types, DataTable DetailTable, String FilterColumn)
         {
@@ -292,6 +345,11 @@ namespace RoomManagementUI.Helper
 
         }
 
+        /// <summary>
+        /// Handle the data/image binding in data grid cell
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void LocationDataGrid_CellFormatting(object sender, System.Windows.Forms.DataGridViewCellFormattingEventArgs e)
         {
             try
@@ -326,6 +384,11 @@ namespace RoomManagementUI.Helper
             }
         }
 
+        /// <summary>
+        /// grid cell click event -- View Booking details and Add booking form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LocationDataGrid_CellContentClick_Event(object sender, DataGridViewCellEventArgs e)
         {
             int index = 0;
@@ -395,18 +458,24 @@ namespace RoomManagementUI.Helper
         }
         #endregion
 
+        /// <summary>
+        /// all click event for data click
+        /// </summary>
+        /// <param name="dataGridView"></param>
         public void DGVDetailGridClickEvents(DataGridView dataGridView)
         {
-
             RoomDataGrid = dataGridView;
-
             RoomDataGrid.CellContentClick += new DataGridViewCellEventHandler(RoomDataGrid_CellContentClick_Event);
-
-
         }
+
+        /// <summary>
+        /// Detail view cell click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RoomDataGrid_CellContentClick_Event(object sender, DataGridViewCellEventArgs e)
         {
-            MessageBox.Show("Detail grid Clicked : You clicked on " + RoomDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value, Constants.ApplicationName);
+            //MessageBox.Show("Detail grid Clicked : You clicked on " + RoomDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value, Constants.ApplicationName);
         }
 
     }

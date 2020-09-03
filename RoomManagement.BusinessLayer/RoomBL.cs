@@ -1,5 +1,6 @@
 ﻿using RoomManagementDataAccess;
 using RoomManagementModels;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 
@@ -85,10 +86,10 @@ namespace RoomManagement.BusinessLayer
         /// Get Room details for DashBoard
         /// </summary>
         /// <returns></returns>
-        public dynamic GetDashBoard()
+        public dynamic GetDashBoard(DateTime startDate, DateTime endDate)
         {
             RoomDL room = new RoomDL();
-            dynamic result = room.GetBookingDashboard();
+            dynamic result = room.GetBookingDashboard(startDate, endDate);
             return result;
         }
         #endregion

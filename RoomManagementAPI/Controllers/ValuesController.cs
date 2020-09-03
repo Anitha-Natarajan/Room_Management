@@ -184,12 +184,12 @@ namespace RoomManagementAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/GetDashboard")]
-        public IHttpActionResult GetDashboard()
+        public IHttpActionResult GetDashboard(DateTime startDate, DateTime endDate)
         {            
             try
             {
                 RoomBL room = new RoomBL();
-                var dashboard = room.GetDashBoard();
+                var dashboard = room.GetDashBoard(startDate, endDate);
                 return Ok(dashboard);
             }
             catch (Exception ex)

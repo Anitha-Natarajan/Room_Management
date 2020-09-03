@@ -93,10 +93,12 @@ namespace RoomManagementDataAccess
         /// Get the Room and boooking details for Dashboard display 
         /// </summary>
         /// <returns></returns>
-        public DataTable GetBookingDashboard()
+        public DataTable GetBookingDashboard(DateTime bookingStartDate, DateTime bookingEndDate)
         {            
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             SqlCommand sqlCommand = new SqlCommand("sp_GetRoomBookingDashboardDetails", sqlConnection);
+            sqlCommand.Parameters.Add(new SqlParameter("@BookingStartDate", bookingStartDate));
+            sqlCommand.Parameters.Add(new SqlParameter("@BookingEndDate", bookingEndDate));
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
             DataTable dataTable = new DataTable();
             try
